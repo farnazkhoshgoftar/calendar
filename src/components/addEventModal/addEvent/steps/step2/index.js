@@ -56,13 +56,14 @@ const Step2 = ({ goToStep, dayName, onCancel }) => {
     goToStep();
   };
 
+  
   return (
     <Div>
       <input
         type="time"
         placeholder="Time"
         onChange={(e) => setInputTime(`${dayName}-${e.target.value}`)}
-        value={inputTime}
+
       />
 
       <input

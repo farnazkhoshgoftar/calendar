@@ -35,13 +35,13 @@ const Add = styled.div`
   align-items: center;
   margin-top: 20px;
   div {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border: 1px solid rgb(97, 193, 231);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
+    border-radius: 25px;
     font-size: 26px;
     margin-right: 5px;
   }

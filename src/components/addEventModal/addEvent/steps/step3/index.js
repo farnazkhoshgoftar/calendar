@@ -11,6 +11,7 @@ import TimeCounter from "./timeCounter";
 const Container = styled.div`
 p{
   font-size:26px;
+  margin-top:30px;
 }
 `
 const Row = styled.div`
