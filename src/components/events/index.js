@@ -1,9 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
+import { deleteEventList } from "../../redux/actions";
+
 const Contanier = styled.div`
   width: 20%;
   display: flex;
@@ -35,12 +38,19 @@ const Row = styled.div`
 
 const Events = () => {
   const events = useSelector((state) => state.events.EventsList);
+  console.log("events", events);
+  const dispatch = useDispatch();
+
+  const deleted = (dayName, id) => {
+    dispatch(deleteEventList(dayName, id));
+  };
+
   return (
     <Contanier>
       {Object.keys(events).map((key) => {
         return (
-          <RowContainer >
-            <h2>{key}</h2>
+          <RowContainer>
+            {events[key].length ? <h2>{key}</h2> : null}
             {events[key].map((item) => (
               <Row key={item.id}>
                 <p>{item.inputTitle}</p>
@@ -48,7 +58,7 @@ const Events = () => {
                   <span>
                     <FontAwesomeIcon icon={faEdit} />
                   </span>
-                  <span>
+                  <span onClick={() => deleted(item.dayName, item.id)}>
                     <FontAwesomeIcon icon={faTrashAlt} />
                   </span>
                 </div>

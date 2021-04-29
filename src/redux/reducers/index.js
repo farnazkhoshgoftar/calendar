@@ -1,5 +1,7 @@
 import { ADD_EVENT } from "../actions/types";
 import { DELETE_EVENT } from "../actions/types";
+import { DELETE_EVENT_LIST } from "../actions/types";
+
 const INITIAL_STATE = {
   EventsList: {},
 };
@@ -33,7 +35,22 @@ export const events = (state = INITIAL_STATE, action) => {
         ...state,
         EventsList: {
           ...state.EventsList,
-          [action.payload.dayName]: item
+          [action.payload.dayName]: item,
+        },
+      };
+    }
+
+    case DELETE_EVENT_LIST: {
+      let item = state.EventsList[action.payload.dayName];
+      var filtered = item.filter((value) => {
+        return value.id !== action.payload.id;
+      });
+
+      return {
+        ...state,
+        EventsList: {
+          ...state.EventsList,
+          [action.payload.dayName]: filtered,
         },
       };
     }
