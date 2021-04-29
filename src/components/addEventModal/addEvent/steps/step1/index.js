@@ -7,7 +7,6 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import { deleteEventList } from "../../../../../redux/actions";
 
-
 const Container = styled.div`
   text-align: center;
   margin-top: 100px;
@@ -48,18 +47,17 @@ const Add = styled.div`
   }
 `;
 
-
-const Row=styled.div`
-display:flex;
-justify-content:space-between;
-border-bottom: 2px solid lightgray;
-margin:20px 0;
-padding:0 10px;
-span{
-  margin-left:10px;
-  cursor: pointer;
-}
-`
+const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid lightgray;
+  margin: 20px 0;
+  padding: 0 10px;
+  span {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+`;
 const Step1 = ({ goToStep, dayName }) => {
   const events = useSelector((state) => state.events.EventsList);
 
@@ -77,12 +75,12 @@ const Step1 = ({ goToStep, dayName }) => {
             <Row>
               <p>{item.inputTitle}</p>
               <div>
-              <span>
-                <FontAwesomeIcon icon={faEdit} />
-              </span>
-              <span onClick={() => deleted(item.dayName, item.id)}>
-                <FontAwesomeIcon icon={faTrashAlt} />
-              </span>
+                <span>
+                  <FontAwesomeIcon icon={faEdit} />
+                </span>
+                <span onClick={() => deleted(item.dayName, item.id)}>
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </span>
               </div>
             </Row>
           ))}

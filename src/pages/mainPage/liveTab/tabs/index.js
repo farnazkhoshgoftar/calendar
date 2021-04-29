@@ -13,6 +13,8 @@ const TabsHeader = styled.ul`
     text-align: center;
     cursor: pointer;
     padding:10px 0;
+    color: red;
+  font-size: 22px;
   }
   li.active {
     border-bottom: 3px solid red;
