@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
+import { deleteEventList } from "../../../../../redux/actions";
+
 
 const Container = styled.div`
   text-align: center;
@@ -28,7 +34,7 @@ const Add = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  margin-top:20px;
+  margin-top: 20px;
   div {
     width: 20px;
     height: 20px;
@@ -38,24 +44,47 @@ const Add = styled.div`
     justify-content: center;
     border-radius: 20px;
     font-size: 26px;
-    margin-right:5px;
+    margin-right: 5px;
   }
 `;
 
-const List = styled.div`
-  p {
-    border-bottom: 2px solid lightgray;
-    padding: 0 10px;
-  }
-`;
+
+const Row=styled.div`
+display:flex;
+justify-content:space-between;
+border-bottom: 2px solid lightgray;
+margin:20px 0;
+padding:0 10px;
+span{
+  margin-left:10px;
+  cursor: pointer;
+}
+`
 const Step1 = ({ goToStep, dayName }) => {
   const events = useSelector((state) => state.events.EventsList);
+
+  const dispatch = useDispatch();
+
+  const deleted = (dayName, id) => {
+    dispatch(deleteEventList(dayName, id));
+  };
+
   return (
     <>
       {events[dayName] !== undefined ? (
-        <List>
+        <div>
           {events[dayName].map((item) => (
-            <p>{item.inputTitle}</p>
+            <Row>
+              <p>{item.inputTitle}</p>
+              <div>
+              <span>
+                <FontAwesomeIcon icon={faEdit} />
+              </span>
+              <span onClick={() => deleted(item.dayName, item.id)}>
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </span>
+              </div>
+            </Row>
           ))}
           <Add
             onClick={() => {
@@ -67,7 +96,7 @@ const Step1 = ({ goToStep, dayName }) => {
             </div>
             Add Event
           </Add>
-        </List>
+        </div>
       ) : (
         <Container>
           <button
